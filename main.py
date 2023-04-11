@@ -41,8 +41,8 @@ def get_args(count, info):
     return [f"{count}.", info['ip'], info['country'], as_number, provider]
 
 
-def trace(address, table):
-    trac_proc = subprocess.Popen(["tracert", address], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+def trace(addr, table):
+    trac_proc = subprocess.Popen(["tracert", addr], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     counter = 0
 
     for raw_line in iter(trac_proc.stdout.readline, ''):
