@@ -2,27 +2,28 @@ import json
 import re
 import subprocess
 from urllib import request
+
 from prettytable import PrettyTable
 
 
 def is_completed(data):
-    return 'Trace Complete' in data \
+    return 'Trace complete' in data \
            or 'Трассировка завершена' in data
 
 
 def is_timed_out(data):
-    return 'Request Timed Out' in data \
-            or 'Превышен интервал ожидания' in data
+    return 'Request timed out' in data \
+           or 'Превышен интервал ожидания' in data
 
 
 def is_beginning(data):
     return 'Tracing route' in data \
-        or 'Трассировка маршрута' in data
+           or 'Трассировка маршрута' in data
 
 
 def is_invalid_input(data):
     return 'Unable to resolve' in data \
-            or 'Не удается разрешить' in data
+           or 'Не удается разрешить' in data
 
 
 def generate_table():
@@ -40,8 +41,8 @@ def get_args(count, info):
     return [f"{count}.", info['ip'], info['country'], as_number, provider]
 
 
-def trace(address, table):
-    trac_proc = subprocess.Popen(["tracert", address], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+def trace(addr, table):
+    trac_proc = subprocess.Popen(["tracert", addr], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     counter = 0
 
     for raw_line in iter(trac_proc.stdout.readline, ''):
