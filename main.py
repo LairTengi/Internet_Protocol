@@ -50,8 +50,7 @@ def trace(addr, table):
         ip = re.findall('\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', line)
 
         if is_completed(line):
-            print(table)
-            return
+            return table
         if is_invalid_input(line):
             print('Invalid input')
             return
@@ -67,9 +66,10 @@ def trace(addr, table):
                 table.add_row([f"{counter}.", info['ip'], '*', '*', '*'])
             else:
                 table.add_row(get_args(counter, info))
+    return table
 
 
 if __name__ == '__main__':
     address = input("Enter Address: ")
     table = generate_table()
-    trace(address, table)
+    print(trace(address, table))
